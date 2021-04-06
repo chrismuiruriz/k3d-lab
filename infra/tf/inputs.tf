@@ -29,7 +29,7 @@ variable "worker_type" {
   default = "t3.micro"
 }
 
-variable "bastion_type" {
+variable "instance_type" {
   default = "t3.micro"
 }
 

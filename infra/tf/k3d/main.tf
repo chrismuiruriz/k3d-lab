@@ -1,21 +1,21 @@
 module "tags" {
   source      = "git::https://github.com/cloudposse/terraform-null-label.git"
-  namespace   = "bastion"
+  namespace   = "k3d"
   environment = var.env
   name        = var.project
   delimiter   = "_"
 
   tags = {
-    name      = "bastion"
+    name      = "k3d"
     owner     = var.owner
     project   = var.project
     env       = var.env
     workspace = var.workspace
-    comments  = "k3d bastion"
+    comments  = "k3d k3d"
   }
 }
 
-resource "aws_subnet" "bastion" {
+resource "aws_subnet" "k3d" {
   vpc_id                  = var.vpc.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
@@ -35,7 +35,7 @@ variable "ports" {
   ]
 }
 
-resource "aws_security_group" "bastion" {
+resource "aws_security_group" "k3d" {
   vpc_id = var.vpc.id
   tags   = module.tags.tags
 
@@ -57,28 +57,28 @@ resource "aws_security_group" "bastion" {
   }
 }
 
-resource "aws_key_pair" "bastion" {
-  key_name   = format("%s%s", var.name, "_keypair_k3d_bastion")
+resource "aws_key_pair" "k3d" {
+  key_name   = format("%s%s", var.name, "_keypair_k3d_k3d")
   public_key = file(var.public_key_path)
 }
 
-data "aws_ami" "latest_bastion" {
+data "aws_ami" "latest_k3d" {
   most_recent = true
   owners      = ["self"]
-  name_regex  = "^${var.name}-bastion-\\d*$"
+  name_regex  = "^${var.name}-k3d-\\d*$"
 
   filter {
     name   = "name"
-    values = ["${var.name}-bastion-*"]
+    values = ["${var.name}-k3d-*"]
   }
 }
 
-resource "aws_instance" "bastion" {
-  ami                    = data.aws_ami.latest_bastion.id
+resource "aws_instance" "k3d" {
+  ami                    = data.aws_ami.latest_k3d.id
   instance_type          = var.instance_type
-  subnet_id              = aws_subnet.bastion.id
-  vpc_security_group_ids = [aws_security_group.bastion.id]
-  key_name               = aws_key_pair.bastion.id
+  subnet_id              = aws_subnet.k3d.id
+  vpc_security_group_ids = [aws_security_group.k3d.id]
+  key_name               = aws_key_pair.k3d.id
 
   root_block_device {
     volume_size = 100

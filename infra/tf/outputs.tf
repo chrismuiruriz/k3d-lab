@@ -1,7 +1,7 @@
-output "bastion" {
-  value = module.bastion.bastion
+output "k3d" {
+  value = module.k3d.k3d
 }
-output "bastion_ip" {
-  value = module.bastion.bastion_ip
+output "k3d_ip" {
+  value = module.k3d.k3d_ip
 }
 

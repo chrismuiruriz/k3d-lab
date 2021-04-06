@@ -12,8 +12,8 @@ module "vpc" {
   workspace = var.workspace
 }
 
-module "bastion" {
-  source = "./bastion"
+module "k3d" {
+  source = "./k3d"
   vpc    = module.vpc.vpc
   az     = module.vpc.az
 
@@ -25,6 +25,6 @@ module "bastion" {
   key_name         = var.key_name
   public_key_path  = var.public_key_path
   private_key_path = var.private_key_path
-  instance_type    = var.bastion_type
+  instance_type    = var.instance_type
   aws_region       = var.region
 }
