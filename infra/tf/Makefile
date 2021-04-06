@@ -114,10 +114,10 @@ clean:
 	rm -f output.json
 	rm -f plan.out
 
-go: clone connect
+go: pull connect
 
-clone:
-	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) git clone https://github.com/BryanDollery/k3d-lab
+pull:
+	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) cd git/k3d-lab && git pull
 
 ip:
 	echo $$(cat output.json | jq '.bastion_ip.value' | xargs)
