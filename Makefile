@@ -23,3 +23,6 @@ dashboard:
 
 corpora:
 	kubectl apply -f apps/corpora/k8s/namespace.yaml -f apps/corpora/k8s
+
+go:
+	make -C infra/tf go

@@ -114,11 +114,10 @@ clean:
 	rm -f output.json
 	rm -f plan.out
 
-copy: output.json
-	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) rm -f /home/ubuntu/.ssh/id_rsa
-	scp -i ssh/id_rsa ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs):/home/ubuntu/.ssh/
-	scp -i ssh/id_rsa ssh/id_rsa.pub ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs):/home/ubuntu/.ssh/
-	ssh -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) chmod 400 /home/ubuntu/.ssh/id*
+go: clone connect
+
+clone:
+	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) git clone https://github.com/BryanDollery/k3d-lab
 
 ip:
 	echo $$(cat output.json | jq '.bastion_ip.value' | xargs)
