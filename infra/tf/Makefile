@@ -3,7 +3,7 @@
 up: fmt plan apply
 
 help:
-	@echo "syntax: make <target>\nWhere target is: ver, debug, clean, output, up, fmt, plan, apply, copy, ip, connect, init, test\n\nUses terraform to manage a simple bastion and a more complex k3s cluster"
+	@echo "syntax: make <target>\nWhere target is: ver, debug, clean, output, up, fmt, plan, apply, copy, ip, connect, init, test\n\nUses terraform to manage a simple k3d and a more complex k3s cluster"
 
 debug:
 	docker container run -it --rm \
@@ -117,13 +117,13 @@ clean:
 go: pull connect
 
 pull:
-	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs) cd git/k3d-lab && git pull
+	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.k3d_ip.value' | xargs) cd git/k3d-lab && git pull
 
 ip:
-	echo $$(cat output.json | jq '.bastion_ip.value' | xargs)
+	echo $$(cat output.json | jq '.k3d_ip.value' | xargs)
 
 connect: output.json
-	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.bastion_ip.value' | xargs)
+	ssh -oStrictHostKeyChecking=no -i ssh/id_rsa ubuntu@$$(cat output.json | jq '.k3d_ip.value' | xargs)
 
 init: clean
 	rm -rf .terraform ssh
