@@ -1,0 +1,6 @@
+**/terraform.tfstate.backup
+**/terraform.tfstate
+**/ssh
+**/.terraform
+**/output.json
+**/plan.out
