@@ -5,16 +5,23 @@ servers: 1
 agents: 3 
 image: rancher/k3s:v1.20.4-k3s1
 ports:
+  - port: 6443:6443
+    nodeFilters:
+      - server[0]
   - port: 8080:80
     nodeFilters:
       - loadbalancer
   - port: 8443:443
     nodeFilters:
       - loadbalancer
+  - port: 30000:32500
+    nodeFilters:
+      - loadbalancer
 options:
   k3d: 
     wait: true
     timeout: "60s"
+    disableLoadbalancer: false
   k3s: 
     extraServerArgs: 
       - --no-deploy=traefik
