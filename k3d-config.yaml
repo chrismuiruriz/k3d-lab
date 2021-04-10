@@ -1,0 +1,23 @@
+apiVersion: k3d.io/v1alpha2 
+kind: Simple 
+name: k3d-lab
+servers: 1 
+agents: 3 
+image: rancher/k3s:v1.20.4-k3s1 
+ports:
+  - port: 8080:80 
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d: 
+    wait: true 
+    timeout: "60s" 
+    disableLoadbalancer: false 
+    disableImageVolume: false 
+    disableHostIPInjection: false 
+  k3s: 
+    extraServerArgs: 
+      - no-deploy=traefik
+  kubeconfig:
+    updateDefaultKubeconfig: true 
+    switchCurrentContext: true 
