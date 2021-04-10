@@ -8,7 +8,7 @@ up:
 	kubectl taint node k3d-lab-server-0 k3s-controlplane=true:NoSchedule
 
 platform:
-	kubectl apply -f platform/ingress/nginx-ingress-deploy.yaml
+	kubectl apply -f platform/ingress/nginx.yaml
 
 dashboard:
 	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
