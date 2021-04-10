@@ -2,17 +2,10 @@ apiVersion: k3d.io/v1alpha2
 kind: Simple 
 name: k3d-lab
 servers: 1 
-agents: 4 
+agents: 3
 image: rancher/k3s:v1.20.4-k3s1 
 ports:
-  - port: 30000:30000
-    nodeFilters:
-      - agent[0]
-  - port: 30001:30001
-    nodeFilters:
-      - agent[0]
-labels:
-  - label: ingress=true
+  - port: 30000:30001
     nodeFilters:
       - agent[0]
 options:
