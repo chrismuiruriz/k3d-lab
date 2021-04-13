@@ -17,8 +17,7 @@ dashboard:
 
 corpora:
 	kubectl apply -f apps/corpora/k8s/namespace.yaml -f apps/corpora/k8s/deploy.yaml -f apps/corpora/k8s/service.yaml
-	sleep 20
-	kubectl apply -f /home/ubuntu/git/k3d-lab/apps/corpora/k8s/ingress.yaml
+	kubectl apply -f apps/corpora/k8s/ingress.yaml
 
 go:
 	make -C infra/tf go

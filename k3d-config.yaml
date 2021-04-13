@@ -5,7 +5,10 @@ servers: 1
 agents: 3
 image: rancher/k3s:v1.20.4-k3s1 
 ports:
-  - port: 30000:30001
+  - port: 30000:80
+    nodeFilters:
+      - agent[0]
+  - port: 30001:443
     nodeFilters:
       - agent[0]
 options:
