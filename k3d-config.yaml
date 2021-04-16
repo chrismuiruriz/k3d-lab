@@ -4,6 +4,8 @@ name: k3d-lab
 servers: 1 
 agents: 3
 image: rancher/k3s:v1.20.4-k3s1 
+registries:
+  create: true
 ports:
   - port: 30000:30000
     nodeFilters:

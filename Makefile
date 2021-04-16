@@ -17,7 +17,6 @@ dashboard:
 
 corpora:
 	kubectl apply -f apps/corpora/k8s/namespace.yaml -f apps/corpora/k8s/deploy.yaml -f apps/corpora/k8s/service.yaml
-	kubectl apply -f apps/corpora/k8s/ingress.yaml
 
 go:
 	make -C infra/tf go
