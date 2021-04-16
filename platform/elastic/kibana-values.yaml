@@ -1,0 +1,34 @@
+healthCheckPath: "/kibana/app/kibana"
+# elasticsearchHosts: "http://elastisearch-master.elastic-system:9200"
+
+# elastic-values.yaml
+# Allocate smaller chunks of memory per pod.
+resources:
+  requests:
+    cpu: "100m"
+    memory: "512M"
+  limits:
+    cpu: "1000m"
+    memory: "512M"
+
+# Request smaller persistent volumes.
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: "local-path"
+  resources:
+    requests:
+      storage: 100M
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: 
+    paths:
+    - path: /kibana
+
+kibanaConfig:
+  kibana.yml: |
+    server.basePath: /kibana
+    server.rewriteBasePath: true

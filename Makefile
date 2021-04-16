@@ -10,7 +10,7 @@ down:
 	k3d cluster delete lab
 
 platform:
-	kubectl apply -f platform/ingress/nginx.yaml
+	make -C platform install
 
 dashboard:
 	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
