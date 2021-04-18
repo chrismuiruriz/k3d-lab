@@ -23,6 +23,7 @@ options:
   k3s: 
     extraServerArgs: 
       - --no-deploy=traefik
+      - --disable=metrics-server
   kubeconfig:
     updateDefaultKubeconfig: true 
     switchCurrentContext: true 

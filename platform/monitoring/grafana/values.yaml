@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  path: /grafana
+  pathType: Prefix
+  hosts:
+  - ""
+
+grafana.ini:
+  server:
+    root_url: /grafana/
+    serve_from_sub_path: true
+

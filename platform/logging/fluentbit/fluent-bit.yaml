@@ -1,9 +1,4 @@
 ---
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: logging
----
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
@@ -60,7 +55,7 @@ spec:
           - containerPort: 2020
         env:
         - name: FLUENT_ELASTICSEARCH_HOST
-          value: "elasticsearch-master.elastic-system"
+          value: "elasticsearch-master"
         - name: FLUENT_ELASTICSEARCH_PORT
           value: "9200"
         volumeMounts:
