@@ -1,7 +1,7 @@
 
 install:
-	helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
+	@helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
 
 delete:
-	helm delete prometheus prometheus-community/kube-prometheus-stack -n monitoring
+	@helm delete prometheus prometheus-community/kube-prometheus-stack -n monitoring
 
