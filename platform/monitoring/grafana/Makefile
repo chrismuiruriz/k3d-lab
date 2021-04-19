@@ -8,6 +8,7 @@ wait:
 	@sleep 5
 
 password:
+	@echo "4. Password "
 	@kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 delete:

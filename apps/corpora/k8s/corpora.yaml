@@ -1,0 +1,62 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: corpora
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corpora 
+  namespace: corpora
+  labels:
+    app: corpora
+    type: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: corpora
+  template:
+    metadata:
+      labels:
+        app: corpora
+    spec:
+      containers:
+      - name: corpora
+        image: bryandollery/corpora
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: corpora
+  namespace: corpora
+spec:
+  type: ClusterIP
+  selector:
+    app: corpora
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: corpora
+  namespace: corpora
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /corpora(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: corpora
+            port:
+              number: 80

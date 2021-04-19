@@ -1,0 +1,64 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: source
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: source
+  namespace: source
+  labels:
+    app: source
+    type: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: source
+  template:
+    metadata:
+      labels:
+        app: source
+    spec:
+      containers:
+      - name: source
+        image: bryandollery/ndsobc-source
+        ports:
+        - containerPort: 80
+        env:
+        - name: SINK_HOST
+          value: sink.sink.cluster.local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: source
+  namespace: source
+spec:
+  type: ClusterIP
+  selector:
+    app: source
+  ports:
+    - port: 80
+      targetPort: 80
+---  
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: source
+  namespace: source
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /source(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: source
+            port:
+              number: 80

@@ -16,7 +16,7 @@ dashboard:
 	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
 
 corpora:
-	kubectl apply -f apps/corpora/k8s/namespace.yaml -f apps/corpora/k8s/deploy.yaml -f apps/corpora/k8s/service.yaml
+	@make -C apps/corpora/k8s
 
 go:
 	make -C infra/tf go

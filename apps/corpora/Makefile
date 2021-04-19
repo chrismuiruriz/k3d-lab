@@ -8,4 +8,9 @@ release:
 	docker push bryandollery/corpora
 
 deploy:
-	kubectl -n corpora apply -f k8s
+	kubectl -n corpora apply -f ./k8s
+
+test:
+	@echo "Running tests -- may take a few seconds"
+	@./test.sh > /dev/null
+	@echo "Passed"
