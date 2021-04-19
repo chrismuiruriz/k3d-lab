@@ -7,6 +7,42 @@ ingress:
   hosts:
   - ""
 
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      url: http://prometheus-kube-prometheus-prometheus:9090
+      basicAuthUser: admin
+      withCredentials: true
+      isDefault: true
+      secureJsonData:
+        basicAuthPassword: prom-operator
+      version: 1
+      editable: true
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - disableDeletion: true
+      editable: true
+      folder: null
+      name: default
+      options:
+        path: /var/lib/grafana/dashboards/default
+      orgId: 1
+      type: file
+
+dashboards:
+  default:
+    "K8S Cluster Monitor":
+      gnetId: 14249
+      revision: 1
+      datasource: Prometheus
+
 grafana.ini:
   server:
     root_url: /grafana/
