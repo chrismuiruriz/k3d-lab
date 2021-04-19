@@ -1,4 +1,4 @@
-.PHONY: platform infra
+.PHONY: platform infra apps
 
 up: k3d platform corpora
 
