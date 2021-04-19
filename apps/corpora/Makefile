@@ -1,3 +1,5 @@
+install: build release deploy test
+
 build:
 	docker build --tag bryandollery/corpora .
 
