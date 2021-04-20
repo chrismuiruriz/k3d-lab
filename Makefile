@@ -1,6 +1,6 @@
 .PHONY: platform infra apps
 
-up: k3d platform corpora
+up: k3d platform apps
 
 k3d:
 	k3d cluster create lab --config k3d-config.yaml
