@@ -4,6 +4,8 @@ install: install-grafana wait password
 install-grafana:
 	@helm install grafana grafana/grafana -f values.yaml -n monitoring
 
+cycle: delete install
+
 wait:
 	@sleep 5
 
