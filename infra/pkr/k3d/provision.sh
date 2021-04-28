@@ -38,11 +38,16 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 kubectl krew update
 kubectl krew install get-all change-ns ingress-nginx janitor doctor ns pod-dive pod-inspect pod-lens pod-logs pod-shell podevents service-tree sick-pods view-secret
 
+# install helm
+echo "Installing helm"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 # Add some more aliases
 echo 'alias less="less -R"' >> ~/.bashrc
 echo 'alias jq="jq -C"' >> ~/.bashrc
 echo 'export VISUAL=vim' >> ~/.bashrc
 echo 'export EDITOR="$VISUAL"' >> ~/.bashrc
+echo "aliases updated"
 
 # tidy up
 rm -f ~/provision.sh
