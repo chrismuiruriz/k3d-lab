@@ -10,3 +10,5 @@ This repo holds the k3d labs for the Nairobi DevSecOps Bootcamp (NDSOBC). The di
 This is similar to the k3s project in that we are standing up a kubernetes service in aws. We are building a new AMI with k3s and kubectl installed. The makefile in the root of this project can start the k3s server and install the ingress controller and corpora along with cloning this repo -- you may have to do a `git pull` in that repo to get the latest version though.
 
 Once deployed locally, your services and apps will be available on http://localhost:30000 or https://localhost:30001 if you've configured tls for anything.
+
+If you want to though, you can run the provisioner on your laptop and run k3d there -- it should just all work, but let me know if it doesn't.
