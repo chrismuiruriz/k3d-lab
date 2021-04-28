@@ -43,7 +43,7 @@ dashboards:
       revision: 1
       datasource: Prometheus
 
-plugins: "yesoreyeram-boomtheme-panel, grafana-github-datasource, grafana-clock-panel"
+plugins: "yesoreyeram-boomtheme-panel, grafana-github-datasource, grafana-clock-panel, grafana-piechart-panel"
 
 grafana.ini:
   server:
