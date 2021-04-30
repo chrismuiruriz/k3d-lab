@@ -11,15 +11,19 @@ create-namespace:
 delete-namespace:
 	@kubectl delete -f namespace.yaml
 
-install-prometheus:
+prometheus-repo:
 	@make -C prometheus repo
+
+install-prometheus:
 	@make -C prometheus install
 
 delete-prometheus:
 	@make -c prometheus delete
 
-install-grafana:
+grafana-repo:
 	@make -C grafana repo
+
+install-grafana:
 	@make -C grafana install
 
 delete-grafana:

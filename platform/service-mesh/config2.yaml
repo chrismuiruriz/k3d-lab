@@ -1,0 +1,107 @@
+global:
+  enabled: true
+  name: sm
+  domain: consul
+  image: "hashicorp/consul:1.10.0-beta1"
+  imageK8S: "hashicorp/consul-k8s:0.26.0-beta1"
+  datacenter: lab
+  tls:
+    enabled: true
+    enableAutoEncrypt: true
+    verify: true
+    httpsOnly: false
+  acls:
+    manageSystemACLs: true
+  metrics:
+    enabled: true
+    enableAgentMetrics: true
+    enableGatewayMetrics: true
+  consulSidecarContainer:
+    resources:
+      requests:
+        memory: "25Mi"
+        cpu: "20m"
+      limits:
+        memory: "50Mi"
+        cpu: "20m"
+  imageEnvoy: "envoyproxy/envoy-alpine:v1.16.0"
+server:
+  enabled: true
+  replicas: 1
+  exposeGossipAndRPCPorts: false
+  storage: 1Gi
+  connect: true
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: "25m"
+    limits:
+      memory: "50Mi"
+      cpu: "25m"
+externalServers:
+  enabled: false
+client:
+  enabled: true
+  grpc: true
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: "25m"
+    limits:
+      memory: "50Mi"
+      cpu: "50m"
+  snapshotAgent:
+    enabled: false
+dns:
+  enabled: true
+  type: ClusterIP
+ui:
+  enabled: true
+  service:
+    enabled: true
+    type: ClusterIP
+  ingress:
+    enabled: true
+    hosts:
+      - host:
+        paths:
+          - /consului
+  metrics:
+    enabled: true
+    provider: "prometheus"
+    baseURL: http://localhost:30000/prometheus
+connectInject:
+  enabled: true
+  default: true
+  transparentProxy:
+    defaultEnabled: true
+  metrics:
+    defaultEnabled: true
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: "50m"
+    limits:
+      memory: "50Mi"
+      cpu: "50m"
+  initContainer:
+    resources:
+      requests:
+        memory: "25Mi"
+        cpu: "50m"
+      limits:
+        memory: "150Mi"
+        cpu: "50m"
+controller:
+  enabled: true
+  replicas: 1
+meshGateway:
+  enabled: false
+ingressGateways:
+  enabled: false
+terminatingGateways:
+  enabled: false
+prometheus:
+  enabled: false
+tests:
+  enabled: false
