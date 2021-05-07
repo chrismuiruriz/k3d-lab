@@ -6,6 +6,9 @@ This repo holds the k3d labs for the Nairobi DevSecOps Bootcamp (NDSOBC). The di
 * infra/pkr - packer definition for ec2's ami
 * apps/corpora - sample app
 * platform/ingress - nginx ingress controller
+* platform/logging
+* platform/monitoring
+* platform/service-mesh
 * experiment -- work in progress
 
 You can run this on AWS using the terraform configuration in the `infra` folder, or you can just run it on your laptop (maybe -- if you have enough cores and ram). If you run it on your laptop, just run the provisioner script that is in the `infra/pkr` folder to locally install the tools you need. If you run it in aws, then we use packer build a new AMI with k3s and kubectl installed (and a bunch of other stuff too) and we use terraform to deploy that ami and do some other stuff to our aws environment. 
