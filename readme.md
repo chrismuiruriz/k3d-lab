@@ -3,7 +3,7 @@
 This repo holds the k3d labs for the Nairobi DevSecOps Bootcamp (NDSOBC). The directories are:
 
 * infra/tf - terraform for a single ec2 instance (t3.2xl by default)
-* infra/pkr - packer definition for ec2's ami. Also provisioner that you can use on your laptop to run this locally.
+* infra/pkr - packer definition for ec2's ami. This is where the provisioner is.
 * apps/corpora - sample rest-api application
 * apps/microservices/sink - echo api called from 'source', used to demo fluent-bit
 * apps/microservices/source - echo api that logs the request, used to demo fluent-bit
