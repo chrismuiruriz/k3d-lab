@@ -8,6 +8,7 @@ This repo holds the k3d labs for the Nairobi DevSecOps Bootcamp (NDSOBC). The di
 * platform/ingress - nginx ingress controller
 * platform/logging - fluent-bit and elastic
 * platform/monitoring - prometheus and grafana
+* platform/pipelines - tekton (not complete)
 * platform/service-mesh - hashicorp consul (not complete)
 * platform/storage - classes, pv, pvc (not complete)
 * experiment -- work in progress
