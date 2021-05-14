@@ -12,6 +12,9 @@ release:
 deploy:
 	kubectl -n corpora apply -f ./k8s
 
+delete:
+	kubectl -n corpora delete -f ./k8s
+
 test:
 	@echo "Running tests -- may take a few seconds"
 	@./test.sh > /dev/null
