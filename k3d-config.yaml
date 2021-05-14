@@ -7,8 +7,31 @@ image: rancher/k3s:v1.20.4-k3s1
 registries:
   create: false
 volumes:
-  - volume: /tmp/volumes
-    
+  - volume: /tmp/volumes/k3d0/:/volumes/k3d0
+    nodeFilters:
+      - agent[0]
+  - volume: /tmp/volumes/k3d1/:/volumes/k3d1
+    nodeFilters:
+      - agent[1]
+  - volume: /tmp/volumes/k3d2/:/volumes/k3d2
+    nodeFilters:
+      - agent[2]
+  - volume: /tmp/volumes/k3d/:/volumes/k3d
+    nodeFilters:
+      - agent[*]
+labels:
+  - label: vol=0
+    nodeFilters:
+      - agent[0]
+  - label: vol=1
+    nodeFilters:
+      - agent[1]
+  - label: vol=2
+    nodeFilters:
+      - agent[2]
+  - label: sharedvol=true
+    nodeFilters:
+      - agent[*]
 ports:
   - port: 30000:30000
     nodeFilters:

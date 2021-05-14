@@ -1,6 +1,12 @@
 .PHONY: platform infra apps
 
-up: k3d platform apps
+up: init k3d platform apps
+
+init:
+	@mkdir -p /tmp/volumes/k3d0
+	@mkdir -p /tmp/volumes/k3d1
+	@mkdir -p /tmp/volumes/k3d2
+	@mkdir -p /tmp/volumes/k3d
 
 k3d:
 	k3d cluster create lab --config k3d-config.yaml
