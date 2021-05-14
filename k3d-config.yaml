@@ -5,7 +5,10 @@ servers: 1
 agents: 3
 image: rancher/k3s:v1.20.4-k3s1 
 registries:
-  create: true
+  create: false
+volumes:
+  - volume: /tmp/volumes
+    
 ports:
   - port: 30000:30000
     nodeFilters:
