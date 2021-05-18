@@ -18,16 +18,7 @@ spec:
       - name: corpora-image 
         type: image
   steps:
-    - name: dump
-      image: busybox
-      command: ["ls", "-gAlFh", "/root/"]
-    - name: dumpb
-      image: busybox
-      command: ["ls", "-gAlFh", "/root/.docker/"]
-    - name: dumpc
-      image: busybox
-      command: ["ls", "-gAlFh", "/root/.docker/config.json"]
-    - name: dumpd
+    - name: creds
       image: busybox
       command: ["cat", "/root/.docker/config.json"]
     - name: build

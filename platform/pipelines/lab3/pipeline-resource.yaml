@@ -17,4 +17,4 @@ spec:
   type: image
   params:
     - name: url
-      value: index.docker.io/bryandollery/corpora
+      value: bryandollery/corpora:lab
