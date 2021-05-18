@@ -8,13 +8,3 @@ spec:
   params:
     - name: url
       value: https://github.com/bryandollery/k3d-lab
----
-apiVersion: tekton.dev/v1alpha1
-kind: PipelineResource
-metadata:
-  name: corpora-image
-spec:
-  type: image
-  params:
-    - name: url
-      value: docker.io/bryandollery/corpora
