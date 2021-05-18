@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: build-corpora-image-from-git-source-task-run
+spec:
+  serviceAccountName: bryan-docker-hub-account
+  taskRef:
+    name: build-corpora-docker-image-from-git-source 
+  resources:
+    inputs:
+      - name: corpora-source
+        resourceRef:
+          name: corpora-source
+    outputs:
+      - name: corpora-image
+        resourceRef:
+          name: corpora-image

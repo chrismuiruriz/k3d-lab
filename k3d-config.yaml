@@ -3,7 +3,7 @@ kind: Simple
 name: k3d-lab
 servers: 1 
 agents: 3
-image: rancher/k3s:v1.20.4-k3s1 
+image: rancher/k3s:v1.21.1-rc1-k3s1
 registries:
   create: false
 volumes:
