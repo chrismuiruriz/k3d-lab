@@ -6,7 +6,8 @@ spec:
   params:
     - name: pathToDockerFile
       type: string
-      default: $(resources.inputs.corpora-source.path)/apps/corpora/Dockerfile
+        #default: $(resources.inputs.corpora-source.path)/apps/corpora/Dockerfile
+      default: ./Dockerfile
     - name: pathToContext
       type: string
       default: $(resources.inputs.corpora-source.path)/apps/corpora
