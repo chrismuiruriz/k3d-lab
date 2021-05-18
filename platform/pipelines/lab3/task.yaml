@@ -18,14 +18,25 @@ spec:
       - name: corpora-image 
         type: image
   steps:
-    - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v0.16.0
-      env:
-        - name: "DOCKER_HUB_CREDENTIALS"
-          value: bddh
+    - name: dump
+      image: busybox
+      command: ["ls", "-gAlFh", "/root/"]
+    - name: dumpb
+      image: busybox
+      command: ["ls", "-gAlFh", "/root/.docker/"]
+    - name: dumpc
+      image: busybox
+      command: ["ls", "-gAlFh", "/root/.docker/config.json"]
+    - name: dumpd
+      image: busybox
+      command: ["cat", "/root/.docker/config.json"]
+    - name: build
+      image: gcr.io/kaniko-project/executor:latest
       command:
-        - /kaniko/executor
+      - /kaniko/executor
       args:
-        - --dockerfile=$(params.pathToDockerFile)
-        - --destination=$(resources.outputs.corpora-image.url)
-        - --context=$(params.pathToContext)
+      - --context=$(params.pathToContext)
+      - --dockerfile=$(params.pathToDockerFile)
+      - --destination=$(resources.outputs.corpora-image.url)
+
+

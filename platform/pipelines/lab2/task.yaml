@@ -14,9 +14,6 @@ spec:
     inputs:
       - name: corpora-source
         type: git
-    outputs:
-      - name: corpora-image 
-        type: image
   steps:
     - name: echo
       image: busybox

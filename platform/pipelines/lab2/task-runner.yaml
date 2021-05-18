@@ -10,7 +10,3 @@ spec:
       - name: corpora-source
         resourceRef:
           name: corpora-source
-    outputs:
-      - name: corpora-image
-        resourceRef:
-          name: corpora-image
