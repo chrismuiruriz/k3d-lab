@@ -1,5 +1,5 @@
 
-clean: delete delete-secret
+clean: delete-secret delete
 
 cycle: clean install
 
@@ -20,15 +20,18 @@ desct:
 logs:
 	@kubectl tkn taskrun logs -f build-corpora-image-from-git-source-task-run
 
-secret:
-	@echo "You should replace these values with your own"
-	kubectl create secret docker-registry bryan-dollery-docker-hub \
+secret: check-DOCKER_USER check-DOCKER_PASSWORD
+	@kubectl create secret docker-registry docker-hub \
 		--docker-server="index.docker.io" \
-		--docker-username="bryandollery" \
-		--docker-password=$$DPWD \
-		--docker-email="bryan.dollery@gmail.com"
-	@kubectl annotate secret bryan-dollery-docker-hub tekton.dev/docker-0=https://index.docker.io
+		--docker-username=$$DOCKER_USER \
+		--docker-password=$$DOCKER_PASSWORD
+	@kubectl annotate secret docker-hub tekton.dev/docker-0=index.docker.io
 
 delete-secret: 
-	@kubectl delete secret bryan-dollery-docker-hub
+	@kubectl delete secret docker-hub
 
+check-%:
+	@if [ "${${*}}" = "" ]; then \
+        echo "Environment variable $* is not set. Needed to access docker-hub."; \
+        exit 1; \
+  fi

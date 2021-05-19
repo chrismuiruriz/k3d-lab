@@ -3,17 +3,17 @@ kind: Task
 metadata:
   name: build-corpora-docker-image-from-git-source
 spec:
-  params:
-    - name: pathToDockerFile
-      type: string
-      default: $(resources.inputs.corpora-source.path)/apps/corpora/Dockerfile
-    - name: pathToContext
-      type: string
-      default: $(resources.inputs.corpora-source.path)/apps/corpora
   resources:
     inputs:
       - name: corpora-source
         type: git
+  params:
+    - name: pathToDockerFile
+      type: string
+      default: Dockerfile
+    - name: pathToContext
+      type: string
+      default: $(resources.inputs.corpora-source.path)/apps/corpora
   steps:
     - name: echo
       image: busybox
@@ -24,6 +24,6 @@ spec:
     - name: ls 
       image: busybox
       command: ["ls", "-gAlFh", "$(params.pathToContext)"]
-    - name: dump-config
+    - name: ls2
       image: busybox
       command: ["ls", "-gAlFh"]

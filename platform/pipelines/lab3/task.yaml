@@ -6,8 +6,7 @@ spec:
   params:
     - name: pathToDockerFile
       type: string
-        #default: $(resources.inputs.corpora-source.path)/apps/corpora/Dockerfile
-      default: ./Dockerfile
+      default: Dockerfile
     - name: pathToContext
       type: string
       default: $(resources.inputs.corpora-source.path)/apps/corpora
@@ -19,16 +18,25 @@ spec:
       - name: corpora-image 
         type: image
   steps:
+    - name: env
+      image: busybox
+      command: 
+      - env
+      env:
+        - name: "DOCKER_CONFIG"
+          value: "/root/.docker"
     - name: creds
       image: busybox
       command: ["cat", "/root/.docker/config.json"]
     - name: build
       image: gcr.io/kaniko-project/executor:latest
+      env:
+        - name: "DOCKER_CONFIG"
+          value: "/root/.docker"
       command:
       - /kaniko/executor
       args:
       - --context=$(params.pathToContext)
       - --dockerfile=$(params.pathToDockerFile)
       - --destination=$(resources.outputs.corpora-image.url)
-
-
+      
