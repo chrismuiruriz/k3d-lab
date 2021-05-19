@@ -22,7 +22,7 @@ logs:
 
 secret: check-DOCKER_USER check-DOCKER_PASSWORD
 	@kubectl create secret docker-registry docker-hub \
-		--docker-server="index.docker.io" \
+		--docker-server="https://index.docker.io/v1/" \
 		--docker-username=$$DOCKER_USER \
 		--docker-password=$$DOCKER_PASSWORD
 	@kubectl annotate secret docker-hub tekton.dev/docker-0=index.docker.io
