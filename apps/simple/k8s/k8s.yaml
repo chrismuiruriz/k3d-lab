@@ -1,0 +1,61 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: simple
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple
+  namespace: simple
+  labels:
+    app: simple
+    type: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simple
+  template:
+    metadata:
+      labels:
+        app: simple
+    spec:
+      containers:
+      - name: simple
+        image: bryandollery/ndsobc-simple
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple
+  namespace: simple
+spec:
+  type: ClusterIP
+  selector:
+    app: simple
+  ports:
+    - port: 80
+      targetPort: 80
+---  
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple
+  namespace: simple
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /simple(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: simple
+            port:
+              number: 80
